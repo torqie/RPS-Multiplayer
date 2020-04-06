@@ -22,29 +22,73 @@
       </div>
 
       <div class="row text-center">
+        <!-- Player One -->
         <div class="col-3">
-          <div id="player1" class="card">
-            <div class="card-header">
-              player 1
-            </div>
+          <div id="player-one" class="card">
+            <div class="card-header bg-primary text-white">Player One</div>
             <div class="card-body">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Name">
-                <div class="input-group-append">
-                  <button class="btn btn-secondary" type="button" id="player1-btn">Submit</button>
-                </div>
-              </div>
+              <!-- Player Name -->
+              <h4 class="name"></h4>
+
+              <!-- Player One Stats-->
+              <ul class="list-inline">
+                <li id="player-one-wins" class="list-inline-item">Wins<span class="badge badge-dark">0</span></li>
+                <li id="player-one-ties" class="list-inline-item">Ties <span class="badge badge-dark">0</span></li>
+                <li id="player-one-losses" class="list-inline-item">Losses <span class="badge badge-dark">0</span></li>
+              </ul>
             </div>
           </div>
         </div>
+
+        <!-- Chat System -->
         <div class="col-6">
           Chat
         </div>
+
+        <!-- Player Two -->
         <div class="col-3">
-          Player Two
+          <div id="player-two" class="card">
+            <div class="card-header bg-danger text-white">Player Two</div>
+            <div class="card-body">
+              <!-- Player Name -->
+              <h4 class="name"></h4>
+
+              <!-- Player two Stats-->
+              <ul class="list-inline">
+                <li id="player-two-wins" class="list-inline-item">Wins<span class="badge badge-dark">0</span></li>
+                <li id="player-two-ties" class="list-inline-item">Ties <span class="badge badge-dark">0</span></li>
+                <li id="player-two-losses" class="list-inline-item">Losses <span class="badge badge-dark">0</span></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
+
+    <div id="add-player" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Join the RPS Fun</h5>
+          </div>
+          <form id="add-player-form" action="#" method="post">
+            <div class="modal-body">
+              <div class="form-group">
+                  <label for="player-text">Tell us your name...</label>
+                  <input type="text" id="player-text" class="form-control" required>
+              </div>
+            </div>
+            <div class="modal-footer text-center">
+              <button type="submit" id="player-btn" class="btn btn-primary">Join Game!</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+
 
     <!-- Jquery -->
     <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -60,6 +104,8 @@
     <!-- Main App JS -->
     <script type="text/javascript" src="assets/js/app.js"></script>
     <!-- Inline Script -->
-    <script type="text/javascript"></script>
+    <script type="text/javascript">
+
+    </script>
   </body>
 </html>

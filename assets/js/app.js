@@ -1,4 +1,4 @@
-const player = {
+const rps = {
 
   firebaseConfig: {
     apiKey: "AIzaSyDwlGPDQtALZye9Sb2hzhWU3539eCjBous",
@@ -10,8 +10,8 @@ const player = {
     appId: "1:507101621662:web:3a126e234be85a1db3ba8f"
   },
   database: null,
-  playerOneRef: "/player1",
-  playerTwoRef: "/player2",
+  playerOneRef: "players/player-one",
+  playerTwoRef: "players/player-two",
 
 
   init() {
@@ -21,40 +21,77 @@ const player = {
 
   setPlayer(name) {
     // Check if player1 Exists.. If so create player 2
-    this.database.ref(this.playerOneRef).once("value").then(function (snapshot) {
+    this.database.ref(this.playerOneRef + "/name").once("value").then(function (snapshot) {
 
       const newPlayer = {
         player: null,
         name: name,
       };
-
       // Check if player1 exists.
-      if(!snapshot.exists()) {
-        newPlayer.player = "player1";
+      if(snapshot.val() == null) {
+        newPlayer.player = "player-one";
       } else {
         // Does exist, create player2
-        newPlayer.player = "player2";
+        newPlayer.player = "player-two";
       }
-      player.createPlayer(newPlayer);
+      rps.createPlayer(newPlayer);
     });
   },
 
   createPlayer(player) {
-    this.database.ref("/" + player.player).set({
+    this.database.ref("players/" + player.player).set({
       name: player.name,
       wins: 0,
       losses: 0,
       ties: 0
     });
   }
-
-
-
-
-
-
 };
 
-player.init();
+rps.init();
 
-player.setPlayer("Terik");
+
+rps.database.ref("players").on("child_added", function(data) {
+  const key = data.key;
+  const player = data.val();
+  console.log("Key: ", key);
+  console.log("Data: ", player);
+
+  $("#" + key + " h4.name").text(player.name.length > 0 ? player.name : "");
+  $("#" + key + "-wins span").text(player.wins);
+  $("#" + key + "-ties span").text(player.ties);
+  $("#" + key + "-losses span").text(player.losses);
+});
+
+rps.database.ref("players").on("child_changed", function(data) {
+  const key = data.key;
+  const player = data.val();
+  console.log("Key: ", key);
+  console.log("Data: ", player);
+
+  $("#" + key + " h4.name").text(player.name.length > 0 ? player.name : "");
+  $("#" + key + "-wins span").text(player.wins);
+  $("#" + key + "-ties span").text(player.ties);
+  $("#" + key + "-losses span").text(player.losses);
+});
+
+
+
+$(function() {
+
+
+  $("#add-player").modal({
+    backdrop: "static",
+    keyboard: false,
+  });
+
+  $("#add-player-form").submit(function(event) {
+    event.preventDefault();
+    const name = $("#player-text").val();
+    rps.setPlayer(name);
+    $("#add-player").modal("hide");
+
+  });
+
+});
+
