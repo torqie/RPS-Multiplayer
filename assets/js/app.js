@@ -1,20 +1,17 @@
 const player = {
 
   firebaseConfig: {
-    apiKey: "AIzaSyCvquFXBz1s5CfX5Q29gi91_L2pdXp3mGI",
-    authDomain: "thone-b04dc.firebaseapp.com",
-    databaseURL: "https://thone-b04dc.firebaseio.com",
-    projectId: "thone-b04dc",
-    storageBucket: "thone-b04dc.appspot.com",
-    messagingSenderId: "556043671959",
-    appId: "1:556043671959:web:17936ef0cd7adcf04e8cd2"
+    apiKey: "AIzaSyDwlGPDQtALZye9Sb2hzhWU3539eCjBous",
+    authDomain: "th-rps-multiplayer.firebaseapp.com",
+    databaseURL: "https://th-rps-multiplayer.firebaseio.com",
+    projectId: "th-rps-multiplayer",
+    storageBucket: "th-rps-multiplayer.appspot.com",
+    messagingSenderId: "507101621662",
+    appId: "1:507101621662:web:3a126e234be85a1db3ba8f"
   },
-
-  wins: 0,
-  losses: 0,
-  ties: 0,
-  choice: null,
   database: null,
+  playerOneRef: "/player1",
+  playerTwoRef: "/player2",
 
 
   init() {
@@ -22,27 +19,36 @@ const player = {
     this.database = firebase.database();
   },
 
-  setPlayer() {
+  setPlayer(name) {
     // Check if player1 Exists.. If so create player 2
-    database.ref("player1").once("value").then(function (snapshot) {
+    this.database.ref(this.playerOneRef).once("value").then(function (snapshot) {
+
+      const newPlayer = {
+        player: null,
+        name: name,
+      };
+
       // Check if player1 exists.
       if(!snapshot.exists()) {
-        // Doesnt exist, create player1
-        database.ref("player1").push({
-
-        });
-
+        newPlayer.player = "player1";
       } else {
         // Does exist, create player2
-
-
+        newPlayer.player = "player2";
       }
+      player.createPlayer(newPlayer);
     });
   },
 
-  createPlayer() {
-
+  createPlayer(player) {
+    this.database.ref("/" + player.player).set({
+      name: player.name,
+      wins: 0,
+      losses: 0,
+      ties: 0
+    });
   }
+
+
 
 
 
@@ -51,4 +57,4 @@ const player = {
 
 player.init();
 
-player.init();
+player.setPlayer("Terik");
