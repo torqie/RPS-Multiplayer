@@ -21,6 +21,8 @@ fb.database.ref("players").on("child_changed", function(data) {
 });
 
 fb.database.ref("players").on("child_removed", function(data) {
+  // Todo:: Clear he players card that has left the game, and set back to defaults
+
   const key = data.key;
   const player = data.val();
 
