@@ -18,9 +18,12 @@ const player = {
       // Check if player1 exists.
       if(typeof playerOneName == "undefined") {
         newPlayer.player = "player-one";
+        sessionStorage.setItem("player", "player-one");
       } else if(typeof playerTwoName == "undefined") {
         // Does exist, create player2
         newPlayer.player = "player-two";
+        sessionStorage.setItem("player", "player-two");
+
       } else {
         return false;
       }
@@ -34,6 +37,83 @@ const player = {
       wins: 0,
       losses: 0,
       ties: 0
+    });
+  },
+
+  setChoice(choice) {
+    this.database.ref("players/" + sessionStorage.getItem("player")).update({
+      choice: choice
+    });
+    this.checkChoices();
+  },
+
+  checkChoices() {
+    this.database.ref("players").once("value", function(snapshot) {
+      const playerOneChoice = snapshot.val()["player-one"].choice;
+      const playerTwoChoice = snapshot.val()["player-two"].choice;
+
+      if(typeof playerOneChoice != "undefined" && typeof playerTwoChoice != "undefined") {
+        console.info(playerOneChoice, playerTwoChoice);
+
+        if(playerOneChoice === playerTwoChoice) {
+          // Tie
+          player.playerTies("player-one");
+          player.playerTies("player-two");
+
+
+        } else if(playerOneChoice === "rock" && playerTwoChoice === "scissors") {
+          // Player One Wins
+          player.playerWins("player-one");
+          player.playerLosses("player-two");
+
+        } else if(playerOneChoice === "paper" && playerTwoChoice === "rock") {
+          // Player One Wins
+          player.playerWins("player-one");
+          player.playerLosses("player-two");
+
+        } else if(playerOneChoice === "scissors" && playerTwoChoice === "paper") {
+          // Player One Wins
+          player.playerWins("player-one");
+          player.playerLosses("player-two");
+
+        } else {
+          // Player Two Wins
+          player.playerWins("player-two");
+          player.playerLosses("player-one");
+        }
+        // Todo:: Clear Choices
+        player.clearChoices();
+      }
+
+
+    });
+  },
+
+  clearChoices() {
+    this.database.ref("players/player-one").child("choice").remove();
+    this.database.ref("players/player-two").child("choice").remove();
+    $(".choice").prop("disabled", false);
+  },
+
+
+  playerWins(player) {
+    this.database.ref("players/" + player).child("wins").transaction(function(wins) {
+      // if(wins) {
+      //   return wins++;
+      // }
+      return (wins || 0) + 1;
+    });
+  },
+
+  playerTies(player) {
+    this.database.ref("players/" + player).child("ties").transaction(function(ties) {
+      return (ties || 0) + 1;
+    });
+  },
+
+  playerLosses(player) {
+    this.database.ref("players/" + player).child("losses").transaction(function(losses) {
+      return (losses || 0) + 1;
     });
   }
 };

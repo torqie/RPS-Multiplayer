@@ -1,8 +1,10 @@
 $(function() {
-  $("#add-player").modal({
-    backdrop: "static",
-    keyboard: false,
-  });
+  if (sessionStorage.getItem("player") === null) {
+    $("#add-player").modal({
+      backdrop: "static",
+      keyboard: false,
+    });
+  }
 
   $("#add-player-form").submit(function(event) {
     event.preventDefault();
@@ -20,10 +22,12 @@ $(function() {
 
     // Update firebase with players choice
 
-
-
-
+    player.setChoice(choice);
   });
 
 });
+
+window.onbeforeunload = function() {
+
+};
 
