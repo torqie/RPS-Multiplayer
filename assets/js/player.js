@@ -40,6 +40,11 @@ const player = {
     });
   },
 
+  removePlayer(player) {
+    sessionStorage.clear();
+    this.database.ref("players/" + player).child("name").remove();
+  },
+
   setChoice(choice) {
     this.database.ref("players/" + sessionStorage.getItem("player")).update({
       choice: choice
@@ -53,13 +58,11 @@ const player = {
       const playerTwoChoice = snapshot.val()["player-two"].choice;
 
       if(typeof playerOneChoice != "undefined" && typeof playerTwoChoice != "undefined") {
-        console.info(playerOneChoice, playerTwoChoice);
 
         if(playerOneChoice === playerTwoChoice) {
           // Tie
           player.playerTies("player-one");
           player.playerTies("player-two");
-
 
         } else if(playerOneChoice === "rock" && playerTwoChoice === "scissors") {
           // Player One Wins
@@ -81,11 +84,12 @@ const player = {
           player.playerWins("player-two");
           player.playerLosses("player-one");
         }
+
+        //Todo:: Show game log in chat window.
+
         // Todo:: Clear Choices
         player.clearChoices();
       }
-
-
     });
   },
 
@@ -95,8 +99,8 @@ const player = {
     $(".choice").prop("disabled", false);
   },
 
-
   playerWins(player) {
+
     this.database.ref("players/" + player).child("wins").transaction(function(wins) {
       // if(wins) {
       //   return wins++;

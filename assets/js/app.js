@@ -27,7 +27,9 @@ $(function() {
 
 });
 
-window.onbeforeunload = function() {
+window.addEventListener('unload', function(e) {
+  player.removePlayer(sessionStorage.getItem("player"));
+  return "Are you sure you want to leave?"
+}, false);
 
-};
 
