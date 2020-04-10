@@ -23,7 +23,6 @@ const player = {
         // Does exist, create player2
         newPlayer.player = "player-two";
         sessionStorage.setItem("player", "player-two");
-
       } else {
         return false;
       }
@@ -32,6 +31,7 @@ const player = {
   },
 
   createPlayer(player) {
+    sessionStorage.setItem("name", player.name);
     this.database.ref("players/" + player.player).set({
       name: player.name,
       wins: 0,
@@ -44,6 +44,7 @@ const player = {
     sessionStorage.clear();
     this.database.ref("players/" + player).child("name").remove();
     this.resetScore();
+    this.resetChat();
   },
 
   resetScore() {
@@ -58,6 +59,11 @@ const player = {
       ties: 0,
       losses: 0,
     });
+  },
+
+  resetChat() {
+    this.database.ref("chat").remove();
+    $("#chat").empty();
   },
 
   setChoice(choice) {
