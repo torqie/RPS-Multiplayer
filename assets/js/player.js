@@ -88,7 +88,9 @@ const player = {
         //Todo:: Show game log in chat window.
 
         // Todo:: Clear Choices
-        player.clearChoices();
+       player.database.ref("settings").update({
+         restart: true
+       });
       }
     });
   },
@@ -97,6 +99,11 @@ const player = {
     this.database.ref("players/player-one").child("choice").remove();
     this.database.ref("players/player-two").child("choice").remove();
     $(".choice").prop("disabled", false);
+
+    player.database.ref("settings").update({
+      restart: false
+    });
+
   },
 
   playerWins(player) {

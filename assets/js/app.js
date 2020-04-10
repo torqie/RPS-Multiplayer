@@ -21,7 +21,6 @@ $(function() {
     $(this).parent().children().prop("disabled", true);
 
     // Update firebase with players choice
-
     player.setChoice(choice);
   });
 
