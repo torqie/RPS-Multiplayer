@@ -41,10 +41,10 @@ const player = {
   },
 
   removePlayer(player) {
-    sessionStorage.clear();
-    this.database.ref("players/" + player).child("name").remove();
     this.resetScore();
     this.resetChat();
+    sessionStorage.clear();
+    this.database.ref("players/" + player).child("name").remove();
   },
 
   resetScore() {

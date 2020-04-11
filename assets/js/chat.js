@@ -1,6 +1,7 @@
 
 
-$("#message-button").on("click",function() {
+$("#message-button").on("click",function(event) {
+  event.preventDefault();
   fb.database.ref("chat").push({
     from: sessionStorage.getItem("name"),
     message: $("#message-txt").val(),
@@ -9,8 +10,8 @@ $("#message-button").on("click",function() {
 });
 
 fb.database.ref("chat").on("child_added", function(data) {
-  const message = $("<div>");
-  message.text(data.val().from + ": " + data.val().message);
+  const message = data.val().from + ": " + data.val().message;
   const chat = $("#chat");
-  $(chat).append(message);
+  $(chat).val($(chat).val() + "\n " + message);
+  $(chat).scrollTop($(chat)[0].scrollHeight);
 });

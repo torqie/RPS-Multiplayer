@@ -1,0 +1,12 @@
+#chat-wrapper {
+  width:400px;
+  position: absolute;
+  bottom: 0;
+  left: 25px;
+}
+
+#chat {
+  position: relative;
+  margin-bottom: 10px;
+  height: 350px;
+}
