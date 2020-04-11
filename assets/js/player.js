@@ -75,35 +75,46 @@ const player = {
 
   checkChoices() {
     this.database.ref("players").once("value", function(snapshot) {
+      const playerOneName = snapshot.val()["player-one"].name;
       const playerOneChoice = snapshot.val()["player-one"].choice;
+
+      const playerTwoName = snapshot.val()["player-two"].name;
       const playerTwoChoice = snapshot.val()["player-two"].choice;
 
       if(typeof playerOneChoice != "undefined" && typeof playerTwoChoice != "undefined") {
+
+        player.sendSystemChat(playerOneName + " chooses - " + playerOneChoice);
+        player.sendSystemChat(playerTwoChoice + " chooses - " + playerTwoChoice);
 
         if(playerOneChoice === playerTwoChoice) {
           // Tie
           player.playerTies("player-one");
           player.playerTies("player-two");
+          player.sendSystemChat("Tie, try again.")
 
         } else if(playerOneChoice === "rock" && playerTwoChoice === "scissors") {
           // Player One Wins
           player.playerWins("player-one");
           player.playerLosses("player-two");
+          player.sendSystemChat(playerOneName + " wins!");
 
         } else if(playerOneChoice === "paper" && playerTwoChoice === "rock") {
           // Player One Wins
           player.playerWins("player-one");
           player.playerLosses("player-two");
+          player.sendSystemChat(playerOneName + " wins!");
 
         } else if(playerOneChoice === "scissors" && playerTwoChoice === "paper") {
           // Player One Wins
           player.playerWins("player-one");
           player.playerLosses("player-two");
+          player.sendSystemChat(playerOneName + " wins!");
 
         } else {
           // Player Two Wins
           player.playerWins("player-two");
           player.playerLosses("player-one");
+          player.sendSystemChat(playerTwoName + " wins!");
         }
 
         // Todo:: Clear Choices
@@ -125,7 +136,7 @@ const player = {
   clearChoices() {
     this.database.ref("players/player-one").child("choice").remove();
     this.database.ref("players/player-two").child("choice").remove();
-    $(".choice").prop("disabled", false);
+    $(".choice").prop("disabled", false).removeClass("disabled");
 
     player.database.ref("settings").update({
       restart: false

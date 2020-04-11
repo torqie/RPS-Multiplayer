@@ -12,10 +12,10 @@
 }
 
 .choice img{
-  max-height: 150px ;
+  max-height: 150px;
+  transition: all 1s;
 }
 
 .choice.disabled {
   filter: grayscale(80%) opacity(40%);
-  transition: all 1s;
 }

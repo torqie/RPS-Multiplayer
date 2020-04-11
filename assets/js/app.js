@@ -23,7 +23,7 @@ $(function() {
 
 
     // Update firebase with players choice
-    player.setChoice(choice);
+    setTimeout(function() {player.setChoice(choice)}, 1000);
   });
 
 });
