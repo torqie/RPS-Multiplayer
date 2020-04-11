@@ -8,5 +8,14 @@
 #chat {
   position: relative;
   margin-bottom: 10px;
-  height: 350px;
+  height: 200px;
+}
+
+.choice img{
+  max-height: 150px ;
+}
+
+.choice.disabled {
+  filter: grayscale(80%) opacity(40%);
+  transition: all 1s;
 }

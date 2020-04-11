@@ -13,12 +13,14 @@ $(function() {
     $("#add-player").modal("hide");
   });
 
-  $("#players .choice").on("click", function () {
+  $(".choice").on("click", function () {
     // Store choice selected
     const choice = $(this).attr("data-type"); //rock, paper, scissors
+    console.log("choice", choice);
 
     // Disable choice buttons
-    $(".choice").prop("disabled", true);
+    $(".choice").prop("disabled", true).addClass("disabled");
+
 
     // Update firebase with players choice
     player.setChoice(choice);

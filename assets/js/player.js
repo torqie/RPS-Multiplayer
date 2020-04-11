@@ -106,13 +106,19 @@ const player = {
           player.playerLosses("player-one");
         }
 
-        //Todo:: Show game log in chat window.
-
         // Todo:: Clear Choices
        player.database.ref("settings").update({
          restart: true
        });
       }
+    });
+  },
+
+  sendSystemChat(message) {
+    fb.database.ref("chat").push({
+      from: "System",
+      message: message,
+      datetime: Date.now()
     });
   },
 
