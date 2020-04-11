@@ -18,7 +18,7 @@ $(function() {
     const choice = $(this).attr("data-type"); //rock, paper, scissors
 
     // Disable choice buttons
-    $(this).parent().children().prop("disabled", true);
+    $(".choice").prop("disabled", true);
 
     // Update firebase with players choice
     player.setChoice(choice);
