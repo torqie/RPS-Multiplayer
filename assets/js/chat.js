@@ -7,6 +7,7 @@ $("#message-button").on("click",function(event) {
     message: $("#message-txt").val(),
     datetime: Date.now()
   });
+  $("#message-txt").val("");
 });
 
 fb.database.ref("chat").on("child_added", function(data) {

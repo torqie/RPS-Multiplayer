@@ -41,10 +41,12 @@ const player = {
   },
 
   removePlayer(player) {
+    console.log(player);
     this.resetScore();
     this.resetChat();
-    sessionStorage.clear();
     this.database.ref("players/" + player).child("name").remove();
+    sessionStorage.clear();
+
   },
 
   resetScore() {
@@ -84,7 +86,7 @@ const player = {
       if(typeof playerOneChoice != "undefined" && typeof playerTwoChoice != "undefined") {
 
         player.sendSystemChat(playerOneName + " chooses - " + playerOneChoice);
-        player.sendSystemChat(playerTwoChoice + " chooses - " + playerTwoChoice);
+        player.sendSystemChat(playerTwoName + " chooses - " + playerTwoChoice);
 
         if(playerOneChoice === playerTwoChoice) {
           // Tie
