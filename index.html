@@ -11,13 +11,14 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="assets/css/style.css" />
+
   </head>
   <body>
     <!-- Page Container -->
     <div class="container">
       <div class="row">
         <div class="col-12 text-center">
-          <h1>Multiplayer Rock Paper Scissors</h1>
+          <h1 class="title">Multiplayer Rock Paper Scissors</h1>
         </div>
       </div>
 
@@ -31,9 +32,9 @@
               <h4 class="name"></h4>
               <!-- Player One Stats-->
               <ul class="list-inline">
-                <li id="player-one-wins" class="list-inline-item">Wins<span class="badge badge-dark">0</span></li>
-                <li id="player-one-ties" class="list-inline-item">Ties <span class="badge badge-dark">0</span></li>
-                <li id="player-one-losses" class="list-inline-item">Losses <span class="badge badge-dark">0</span></li>
+                <li id="player-one-wins" class="list-inline-item">Wins <span class="badge badge-success">0</span></li>
+                <li id="player-one-ties" class="list-inline-item">Ties <span class="badge badge-warning">0</span></li>
+                <li id="player-one-losses" class="list-inline-item">Losses <span class="badge badge-danger">0</span></li>
               </ul>
             </div>
           </div>
@@ -50,9 +51,9 @@
               <h4 class="name"></h4>
               <!-- Player two Stats-->
               <ul class="list-inline">
-                <li id="player-two-wins" class="list-inline-item">Wins<span class="badge badge-dark">0</span></li>
-                <li id="player-two-ties" class="list-inline-item">Ties <span class="badge badge-dark">0</span></li>
-                <li id="player-two-losses" class="list-inline-item">Losses <span class="badge badge-dark">0</span></li>
+                <li id="player-two-wins" class="list-inline-item">Wins <span class="badge badge-success">0</span></li>
+                <li id="player-two-ties" class="list-inline-item">Ties <span class="badge badge-warning">0</span></li>
+                <li id="player-two-losses" class="list-inline-item">Losses <span class="badge badge-danger">0</span></li>
               </ul>
 
 
@@ -100,6 +101,10 @@
       </div>
     </div>
 
+
+    <div class="chat-icon">
+      <img class="img-fluid" src="assets/images/chat-icon.png" alt="chat" />
+    </div>
     <div id="chat-wrapper">
       <div class="row">
         <div class="col">
@@ -148,10 +153,8 @@
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
     <!-- Firebase App (the core Firebase SDK) -->
     <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>

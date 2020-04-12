@@ -26,6 +26,10 @@ $(function() {
     setTimeout(function() {player.setChoice(choice)}, 1000);
   });
 
+  $(".chat-icon").on("click", function () {
+    $("#chat-wrapper").fadeToggle();
+  });
+
 });
 
 window.addEventListener('unload', function(e) {

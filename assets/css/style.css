@@ -7,7 +7,7 @@ body {
   font-family: Roboto, sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6, .btn {
+h1, h2, h3, h4, h5, h6, .btn, .card-header {
   font-family: Oswald, sans-serif;
   font-weight: 300;
   text-transform: uppercase;
@@ -18,11 +18,36 @@ h1, h2, h3, h4, h5, h6, .btn {
   font-size: 14px;
 }
 
+.name {
+  text-transform: none;
+}
+
+.title {
+  color: #ffffff;
+  margin-bottom:60px;
+}
+
+.chat-icon {
+  width: 50px;
+  height: 50px;
+  background-color: #ffffff;
+  border: 1px solid #191919;
+  position: absolute;
+  bottom: 15px;
+  left:25px;
+  padding: 10px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+
 #chat-wrapper {
   width:400px;
   position: absolute;
   bottom: 0;
-  left: 25px;
+  left: 125px;
+  z-index: 99;
+
 }
 
 #chat, #message-txt, #message-button {
@@ -30,7 +55,7 @@ h1, h2, h3, h4, h5, h6, .btn {
 }
 
 #chat, #message-txt {
-  background: rgba(238, 238, 238, 0.5);
+  background: rgba(255, 255, 255, 0.6);
   color: #191919;
   border-color: #292929;
 }
